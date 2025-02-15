@@ -21,3 +21,21 @@ function createBoard() {
         board.appendChild(cellElement);
     });
 }
+
+function handleCellClick(e) {
+    const index = e.target.dataset.index;
+    if (gameState[index] !== '' || !gameActive) return;
+
+    gameState[index] = currentPlayer;
+    e.target.textContent = currentPlayer;
+    if (checkWin(currentPlayer)) {
+        statusText.textContent = `Player ${currentPlayer} Wins! 🏆`;
+        gameActive = false;
+    } else if (!gameState.includes('')) {
+        statusText.textContent = "It's a Draw! 🤝";
+        gameActive = false;
+    } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        statusText.textContent = `Player ${currentPlayer}'s Turn`;
+    }
+}
