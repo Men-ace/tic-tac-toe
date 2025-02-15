@@ -1,58 +1,23 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f4f8;
-    font-family: 'Arial', sans-serif;
-}
+const board = document.getElementById('board');
+const statusText = document.getElementById('status');
+let currentPlayer = 'X';
+let gameState = Array(9).fill('');
+let gameActive = true;
 
-.container {
-    text-align: center;
-}
+const winningCombinations = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+];
 
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-gap: 10px;
-    margin: 20px auto;
-}
-
-.cell {
-    width: 100px;
-    height: 100px;
-    background-color: #fff;
-    border: 2px solid #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5em;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.3s;
-}
-
-.cell:hover {
-    background-color: #e0e7ff;
-}
-
-.status {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-}
-
-.reset-btn {
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.reset-btn:hover {
-    background-color: #0056b3;
+function createBoard() {
+    board.innerHTML = '';
+    gameState.forEach((cell, index) => {
+        const cellElement = document.createElement('div');
+        cellElement.classList.add('cell');
+        cellElement.dataset.index = index;
+        cellElement.textContent = cell;
+        cellElement.addEventListener('click', handleCellClick);
+        board.appendChild(cellElement);
+    });
 }
