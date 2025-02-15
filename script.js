@@ -39,3 +39,9 @@ function handleCellClick(e) {
         statusText.textContent = `Player ${currentPlayer}'s Turn`;
     }
 }
+
+function checkWin(player) {
+    return winningCombinations.some(combination =>
+        combination.every(index => gameState[index] === player)
+    );
+}
