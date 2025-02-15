@@ -45,3 +45,13 @@ function checkWin(player) {
         combination.every(index => gameState[index] === player)
     );
 }
+
+function resetGame() {
+    gameState.fill('');
+    currentPlayer = 'X';
+    gameActive = true;
+    statusText.textContent = "Player X's Turn";
+    createBoard();
+}
+
+createBoard();
